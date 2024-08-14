@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Container style changed for better responsiveness */
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;  /* Added to make the container responsive */
+    max-width: 400px;  /* Added to limit the maximum width */
+}
+
+/* Input and button style changes for responsive design */
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    width: 100%;  /* Added to make the input responsive */
+    box-sizing: border-box;  /* Added to include padding and border in width */
+}
+
+button {
+    background-color: blue;
+    color: white;
+    opacity: 80%;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;  /* Added to make the button responsive */
+    box-sizing: border-box;  /* Added to include padding and border in width */
+}
+
+
+#weatherOutput {
+    margin-top: 20px;
+}
+
+/* Media query added to adjust styles for smaller screens */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+}

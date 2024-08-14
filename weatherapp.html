@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="weatherapp_style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="mainName">GEWITTER?!</h1>
+        <input type="text" id="cityInput" placeholder="Geben Sie eine Stadt ein.">
+        <button type="submit" id="weatherButton" onsubmit="getWeather()">Gewitter?!</button>
+        <div id="weatherOutput">
+            <p id="station"></p>
+            <p id="weatherData"></p>
+        </div>
+    </div>
+    <script src="weatherapp_script.js"></script>
+</body>
+</html>
+
