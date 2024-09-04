@@ -41,7 +41,7 @@ async function getWeather() {
     }
     try {
         // Fetch geodata
-        const geo_response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=3c5dbacc5e4db11ed8b00b8052e630a4`);
+        const geo_response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=3c5dbacc5e4db11ed8b00b8052e630a4`);
         const geo_data = await geo_response.json();
 
         if (geo_data.length === 0) {
