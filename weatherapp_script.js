@@ -57,7 +57,7 @@ async function getWeather() {
             document.getElementById('mainName').innerText = 'Gewitter!!!'
             document.getElementById('weatherButton').innerText = 'Gewitter!!!'
         } else {
-            document.getElementById('mainName').innerText = 'Gewitter?!'
+            document.getElementById('mainName').innerText = 'Kein Gewitter.'
             document.getElementById('weatherButton').innerText = 'Gewitter?!'
         }
     } catch (error) {
