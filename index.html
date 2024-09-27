@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="weatherapp_style.css">
-    <link rel="manifest" href="manifest.json">
+
 </head>
 <body>
+    <div class="language-selector">
+        <label for="languageSelect" id="languageLabel">Sprache:</label>
+        <select id="languageSelect">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+        </select>
+    </div>
     <div class="container">
         <h1 id="mainName">GEWITTER?!</h1>
-        <label for="cityInput">Stadt:</label>
+        <label for="cityInput" id="cityLabel">Stadt:</label>
         <input type="text" id="cityInput" placeholder="Geben Sie eine Stadt ein.">
-        <button type="submit" id="weatherButton" onsubmit="getWeather()">Da ist Gewitter?!</button>
+        <button type="button" id="weatherButton" onclick="getWeather()">Da ist Gewitter?!</button>
         <div id="weatherOutput">
             <p id="station"></p>
             <p id="weatherData"></p>
         </div>
     </div>
+    <div id="forecastOutput">
+        <h2 id="forecastTitle"></h2>
+        <div id="forecastContainer"></div>
+    </div>
+
     <script src="weatherapp_script.js"></script>
 </body>
 </html>
-

@@ -1,12 +1,15 @@
-// Set a random background image on load (Refined URLs)
+// Never upload important keys -> this is an exeption to evade handling oAuth scipts on github.io to make an examination of an online server implementation possible
+const apiKey = `3c5dbacc5e4db11ed8b00b8052e630a4`;// 
+
+// Background images for different weather conditions
 const weatherBackgrounds = {
-    Clear: 'url("https://img.fotocommunity.com/sonniger-tag-an-der-hase-db6e4a8b-e4ac-4f11-8711-13923cc05ca7.jpg?height=1080")',
-    Clouds: 'url("https://www.shutterstock.com/image-photo/cloudy-day-green-valley-600nw-627078857.jpg")',
-    Rain: 'url("https://img.freepik.com/free-photo/weather-effects-composition_23-2149853295.jpg")',
-    Drizzle: 'url("https://upload.wikimedia.org/wikipedia/commons/5/5b/Row_of_poplars_in_the_drizzle_-_geograph.org.uk_-_591822.jpg")',
-    Thunderstorm: 'url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3be8fb7d-5a6c-4f22-b44a-615bc9cb3909/dhvne37-d978447b-f91a-49bb-90cc-d33432dbf1c0.png/v1/fill/w_1920,h_1098,q_80,strp/epic_thunderstorm_wallpaper_4k_high_resolution_by_xaynagelast_dhvne37-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNiZThmYjdkLTVhNmMtNGYyMi1iNDRhLTYxNWJjOWNiMzkwOVwvZGh2bmUzNy1kOTc4NDQ3Yi1mOTFhLTQ5YmItOTBjYy1kMzM0MzJkYmYxYzAucG5nIiwiaGVpZ2h0IjoiPD0xMDk4Iiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvM2JlOGZiN2QtNWE2Yy00ZjIyLWI0NGEtNjE1YmM5Y2IzOTA5XC94YXluYWdlbGFzdC00LnBuZyIsIm9wYWNpdHkiOjk1LCJwcm9wb3J0aW9ucyI6MC40NSwiZ3Jhdml0eSI6ImNlbnRlciJ9fQ.FnX-pyNgNAIK_ge7FK33qStRJrqb5o0nM2HuOjapF4E")',
-    Snow: 'url("https://thumbs.dreamstime.com/b/snowy-trees-city-park-sunny-day-white-background-132778541.jpg")',
-    Mist: 'url("https://w.wallhaven.cc/full/p8/wallhaven-p858pj.jpg")'
+    Clear: 'url("./background/sunny.jpg")',
+    Clouds: 'url("./background/cloudy.jpg")',
+    Rain: 'url("./background/rainy.jpg")',
+    Drizzle: 'url("./background/foggy.jpg")',
+    Thunderstorm: 'url("./background/thunderstorm.png")',
+    Snow: 'url("./background/snowy.jpg")',
+    Mist: 'url("./background/foggy2.jpg")'
 };
 
 // Set a random background image on load (Optimized for mobile)
@@ -14,65 +17,187 @@ const backgroundKeys = Object.keys(weatherBackgrounds);
 const randomBackground = weatherBackgrounds[backgroundKeys[Math.floor(Math.random() * backgroundKeys.length)]];
 document.body.style.backgroundImage = randomBackground;
 
+
+let selectedLanguage = 'de';  // Default language is German
+
+// Language-specific texts for different languages
+const translations = {
+    de: {
+        title: "GEWITTER?!",
+        cityLabel: "Stadt:",
+        buttonLabel: "Da ist Gewitter?!",
+        noStorm: "Kein Gewitter.",
+        storm: "Gewitter!!!",
+        inputPlaceholder: "Geben Sie eine Stadt ein.",
+        languageLabel: "Sprache:",
+        stationInfo: "Nächste Wetterstation: ",  
+        tempInfo: "Temperatur: ",                
+        weatherInfo: "Wetter: ",                 
+        cityNotFound: "Stadt nicht gefunden. Bitte versuchen Sie es erneut.", 
+        errorMessage: "Fehler beim Abrufen der Wetterdaten. Bitte versuchen Sie es erneut.",  
+        forecastTitle: "5-Tage-Vorhersage"
+    },
+
+    en: {
+        title: "THUNDERSTORM?!",
+        cityLabel: "City:",
+        buttonLabel: "Is there a storm?!",
+        noStorm: "No storm.",
+        storm: "Storm!!!",
+        inputPlaceholder: "Enter a city.",
+        languageLabel: "Language:",
+        stationInfo: "Nearest weather station: ", 
+        tempInfo: "Temperature: ",                
+        weatherInfo: "Weather: ",                
+        cityNotFound: "City not found. Please try again.",
+        errorMessage: "Error fetching weather data. Please try again.",
+        forecastTitle: "5-Day Forecast"
+    },
+
+    fr: {
+        title: "ORAGE?!",
+        cityLabel: "Ville:",
+        buttonLabel: "Y a-t-il une tempête ?!",
+        noStorm: "Pas de tempête.",
+        storm: "Tempête!!!",
+        inputPlaceholder: "Entrez une ville.",
+        languageLabel: "Langue:",
+        stationInfo: "Station météo la plus proche: ",
+        tempInfo: "Température: ",                      
+        weatherInfo: "Météo: ",                         
+        cityNotFound: "Ville introuvable. Veuillez réessayer.",
+        errorMessage: "Erreur lors de la récupération des données météorologiques. Veuillez réessayer.",
+        forecastTitle: "Prévisions sur 5 jours"  
+    },
+    
+    es: {
+        title: "¿TORMENTA?!",
+        cityLabel: "Ciudad:",
+        buttonLabel: "¿Hay tormenta?",
+        noStorm: "Sin tormenta.",
+        storm: "¡Tormenta!",
+        inputPlaceholder: "Ingrese una ciudad.",
+        languageLabel: "Idioma:",
+        stationInfo: "Estación meteorológica más cercana: ",  
+        tempInfo: "Temperatura: ",                             
+        weatherInfo: "Clima: ",                                
+        cityNotFound: "Ciudad no encontrada. Inténtalo de nuevo.",
+        errorMessage: "Error al obtener los datos meteorológicos. Por favor, inténtalo de nuevo.",
+        forecastTitle: "Pronóstico de 5 días"
+    }
+};
+
+// Updates the static text on the page based on the selected language
+function updateTextContent() {
+    const translation = translations[selectedLanguage];
+    document.getElementById('mainName').innerText = translation.title;
+    document.getElementById('cityLabel').innerText = translation.cityLabel;
+    document.getElementById('weatherButton').innerText = translation.buttonLabel;
+    document.getElementById('cityInput').placeholder = translation.inputPlaceholder;
+    document.getElementById('languageLabel').innerText = translation.languageLabel;
+}
+
+// Event listener for language change
+document.getElementById('languageSelect').addEventListener('change', function() {
+    selectedLanguage = this.value;
+    updateTextContent();
+    getWeather();
+});
+
+// Event-Listener for Enter key
 document.getElementById('cityInput').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         getWeather();
     }
 });
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/serviceworker.js')
-            .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.log('Service Worker registration failed:', error);
-            });
-    });
-}
-
-// Function to fetch and display weather data
+// Function to fetch weather data
 async function getWeather() {
     const city = document.getElementById('cityInput').value;
     if (!city) {
-        alert('Please enter a city');
+        alert(translations[selectedLanguage].inputPlaceholder);
         return;
     }
     try {
-        // Fetch geodata
-        const geo_response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=3c5dbacc5e4db11ed8b00b8052e630a4`);
+        // Fetch geographic coordinates of the city
+        const geo_response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`);
         const geo_data = await geo_response.json();
 
+        // If no data is found for the city
         if (geo_data.length === 0) {
-            alert('City not found. Please try again.');
+            alert(translations[selectedLanguage].cityNotFound);
             return;
         }
 
-        const lat = geo_data[0].lat;
-        const lon = geo_data[0].lon;
+        const lat = geo_data[0].lat; // Get latitude
+        const lon = geo_data[0].lon; // Get longitude
 
-        // Fetch weather data
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=3c5dbacc5e4db11ed8b00b8052e630a4&units=metric`);
+        // Fetch weather data for the coordinates with the selected language
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=3c5dbacc5e4db11ed8b00b8052e630a4&units=metric&lang=${selectedLanguage}`);
         const data = await response.json();
 
-        // Display the nearest weather station and weather data
-        document.getElementById('station').innerText = `Nearest Weather Station: ${data.name}, ${data.sys.country}`;
-        document.getElementById('weatherData').innerText = `Temperature: ${data.main.temp}°C, Condition: ${data.weather[0].description}`;
+        // Output nearest weather station and weather data
+        document.getElementById('station').innerText = translations[selectedLanguage].stationInfo + `: ${data.name}, ${data.sys.country}`;
+        document.getElementById('weatherData').innerText = translations[selectedLanguage].tempInfo + `: ${data.main.temp}°C, `+ translations[selectedLanguage].weatherInfo + `: ${data.weather[0].description}`;
 
-        // Change background image based on weather condition
+        // Change background image based on the weather condition
         const mainWeather = data.weather[0].main;
         document.body.style.backgroundImage = weatherBackgrounds[mainWeather] || randomBackground;
-        // Change Name based on Thunderstorm
+
+        // Update text for thunderstorm indication
         if (mainWeather === 'Thunderstorm') {
-            document.getElementById('mainName').innerText = 'Gewitter!!!'
-            document.getElementById('weatherButton').innerText = 'Gewitter!!!'
+            document.getElementById('mainName').innerText = translations[selectedLanguage].storm;
+            document.getElementById('weatherButton').innerText = translations[selectedLanguage].storm;
         } else {
-            document.getElementById('mainName').innerText = 'Kein Gewitter.'
-            document.getElementById('weatherButton').innerText = 'Gewitter?!'
+            document.getElementById('mainName').innerText = translations[selectedLanguage].noStorm;
+            document.getElementById('weatherButton').innerText = translations[selectedLanguage].buttonLabel;
+        }
+
+        // Fetch 5-day forecast
+        getForecast(lat, lon);
+
+    } catch (error) {
+        alert(translations[selectedLanguage].errorMessage);
+        console.error(error);
+    }
+}
+
+// Function to fetch 5-day forecast data
+async function getForecast(lat, lon) {
+    try {
+        const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=${selectedLanguage}`);
+        const forecastData = await forecastResponse.json();
+
+        const forecastContainer = document.getElementById('forecastContainer');
+        forecastContainer.innerHTML = '';  // Clear previous forecast
+
+        // Make forecast box visible when data is available
+        document.getElementById('forecastOutput').style.display = 'block';
+
+        // Set the forecast title
+        document.getElementById('forecastTitle').innerText = translations[selectedLanguage].forecastTitle || "5-Tage-Vorhersage";
+
+        // Display forecast for every 8th item (24-hour intervals from 3-hour interval response)
+        for (let i = 0; i < forecastData.list.length; i += 8) {
+            const dayData = forecastData.list[i];
+
+            // Create forecast item
+            const forecastDay = document.createElement('div');
+            forecastDay.classList.add('forecast-day');
+
+            // Format the display of each day
+            const date = new Date(dayData.dt * 1000).toLocaleDateString(selectedLanguage, { weekday: 'long', day: 'numeric', month: 'numeric' });
+            const temp = `${dayData.main.temp}°C`;
+            const description = dayData.weather[0].description;
+            
+            forecastDay.innerHTML = `
+                <h3>${date}</h3>
+                <p>${temp}</p>
+                <p>${description}</p>
+            `;
+            forecastContainer.appendChild(forecastDay); // Append forecast item to the container
         }
     } catch (error) {
-        alert('Error fetching weather data. Please try again.');
-        console.error(error);
+        console.error('Error fetching 5-day forecast:', error);
     }
 }
