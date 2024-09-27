@@ -35,7 +35,8 @@ const translations = {
         weatherInfo: "Wetter: ",                 
         cityNotFound: "Stadt nicht gefunden. Bitte versuchen Sie es erneut.", 
         errorMessage: "Fehler beim Abrufen der Wetterdaten. Bitte versuchen Sie es erneut.",  
-        forecastTitle: "5-Tage-Vorhersage"
+        forecastTitle: "5-Tage-Vorhersage",
+        errorForcast: "Fehler beim Abrufen der 5-Tage-Prognose:"
     },
 
     en: {
@@ -51,7 +52,8 @@ const translations = {
         weatherInfo: "Weather: ",                
         cityNotFound: "City not found. Please try again.",
         errorMessage: "Error fetching weather data. Please try again.",
-        forecastTitle: "5-Day Forecast"
+        forecastTitle: "5-Day Forecast",
+        errorForcast: "Error fetching 5-day forecast:"
     },
 
     fr: {
@@ -67,7 +69,8 @@ const translations = {
         weatherInfo: "Météo: ",                         
         cityNotFound: "Ville introuvable. Veuillez réessayer.",
         errorMessage: "Erreur lors de la récupération des données météorologiques. Veuillez réessayer.",
-        forecastTitle: "Prévisions sur 5 jours"  
+        forecastTitle: "Prévisions sur 5 jours",
+        errorForcast: "Erreur lors de la récupération des prévisions sur 5 jours :"  
     },
     
     es: {
@@ -83,7 +86,8 @@ const translations = {
         weatherInfo: "Clima: ",                                
         cityNotFound: "Ciudad no encontrada. Inténtalo de nuevo.",
         errorMessage: "Error al obtener los datos meteorológicos. Por favor, inténtalo de nuevo.",
-        forecastTitle: "Pronóstico de 5 días"
+        forecastTitle: "Pronóstico de 5 días",
+        errorForcast: "Error al obtener el pronóstico de 5 días:"
     }
 };
 
@@ -198,6 +202,6 @@ async function getForecast(lat, lon) {
             forecastContainer.appendChild(forecastDay); // Append forecast item to the container
         }
     } catch (error) {
-        console.error('Error fetching 5-day forecast:', error);
+        console.error(translations[selectedLanguage].errorForcast, error);
     }
 }
